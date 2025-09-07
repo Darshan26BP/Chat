@@ -22,7 +22,7 @@ COLLECTION_NAME = os.getenv('QDRANT_COLLECTION_NAME', 'mite-website')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'admin123')  # Change this!
 
 # Initialize OpenAI
-openai.api_key = 'OPENAI_API_KEY'
+openai.api_key = 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
 
 # Initialize Qdrant
 try:
