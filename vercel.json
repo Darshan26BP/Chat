@@ -4,10 +4,6 @@
     {
       "src": "api/*.py",
       "use": "@vercel/python"
-    },
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -19,10 +15,5 @@
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ],
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.9"
-    }
-  }
+  ]
 }
