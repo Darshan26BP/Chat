@@ -124,7 +124,26 @@ def chat():
 
 @app.route('/api/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'healthy', 'service': 'RAG Chatbot API'})
+    qdrant_status = "connected" if client else "disconnected"
+    
+    # Try to get collection info
+    collection_info = None
+    if client:
+        try:
+            collection_info = client.get_collection(COLLECTION_NAME)
+            vector_count = collection_info.vectors_count if hasattr(collection_info, 'vectors_count') else "unknown"
+        except Exception as e:
+            vector_count = f"error: {str(e)}"
+    else:
+        vector_count = "no connection"
+    
+    return jsonify({
+        'status': 'healthy', 
+        'service': 'RAG Chatbot API',
+        'qdrant_status': qdrant_status,
+        'collection': COLLECTION_NAME,
+        'vector_count': vector_count
+    })
 
 # Vercel serverless function handler
 def handler(request):
